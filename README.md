@@ -55,7 +55,8 @@ into either independently.
   `projectile`, `enemy`, `xp_pickup`, `hud`, `upgrade_menu`)
 - `scripts/` — matching scripts, plus `player_stats.gd` (shared stat
   resource), `upgrade_pool.gd` (upgrade definitions), `enemy_spawner.gd`,
-  `hop_movement.gd`, `totem_controller.gd`, `aim_input.gd`
+  `hop_movement.gd`, `totem_controller.gd`, `aim_input.gd`,
+  `xp_collector.gd` (invisible XP pickup radius on the player)
 
 ## Branches
 

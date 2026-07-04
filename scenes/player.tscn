@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_script"]
 [ext_resource type="Script" path="res://scripts/hop_movement.gd" id="2_hop"]
 [ext_resource type="Script" path="res://scripts/totem_controller.gd" id="3_controller"]
+[ext_resource type="Script" path="res://scripts/xp_collector.gd" id="4_collector"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 12.0
@@ -28,5 +29,13 @@ player = NodePath("..")
 script = ExtResource("3_controller")
 player = NodePath("..")
 hop_movement = NodePath("../HopMovement")
+
+[node name="XpCollector" type="Area2D" parent="." node_paths=PackedStringArray("player")]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("4_collector")
+player = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XpCollector"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
