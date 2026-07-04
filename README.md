@@ -19,11 +19,12 @@ virtual cursor around the player.
 - **Cursor past outer ring** — hop toward the cursor; hop distance scales
   with how far past the ring the cursor is, up to the move speed stat.
   Direction only changes between hops; no landing lag between chained hops.
-- **Pick up totem** — stand still (cursor in inner ring) within pickup range
-  of the inert totem; pickup and charge-up start automatically. You are
-  locked in place and fully vulnerable while charging.
-- **Left click / gamepad bottom button (`throw`)** — release the throw. The
-  totem flies to the arrow tip and you are launched to the same spot.
+- **Left click / gamepad bottom button (`throw`) near the totem** — while
+  standing still (cursor in inner ring) within pickup range of the inert
+  totem, pressing throw picks it up and starts the charge-up. You are locked
+  in place and fully vulnerable while charging.
+- **Left click / gamepad bottom button (`throw`) again** — release the throw.
+  The totem flies to the arrow tip and you are launched to the same spot.
 
 Once placed, the totem autofires at the nearest enemy until its charges run
 out, then goes inert (gray) where it landed. Hop back and stand next to it to
@@ -40,6 +41,8 @@ retrieve it.
   from the `attack_speed` / `attack_damage` stats; max throw distance from
   the `throw_distance` stat (no upgrade wired yet).
 - `scripts/aim_input.gd` — shared mouse/stick aim helper used by both.
+- `scripts/background_grid.gd` — purely visual world-aligned grid that
+  follows the camera so movement reads clearly.
 
 The two systems only touch through `HopMovement.launch_to()` (the throw
 launch) and `Player.control_locked` (the charge lock), so augments can hook

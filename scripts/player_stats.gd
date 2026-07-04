@@ -4,7 +4,7 @@ extends Resource
 ## Mutable run-time stats for the player. Upgrades modify these directly;
 ## systems (hop movement, totem) read them live so changes apply immediately.
 
-@export var move_speed: float = 220.0 # max hop distance in pixels
+@export var move_speed: float = 110.0 # max hop distance in pixels
 @export var max_hp: float = 100.0
 @export var hp_regen: float = 0.0 # HP per second
 @export var armor: float = 0.0 # flat damage reduction per hit (min 1 damage taken)

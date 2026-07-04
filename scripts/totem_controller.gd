@@ -1,13 +1,13 @@
 class_name TotemController
 extends Node2D
 
-## Player-side half of the totem system. Picks the totem up automatically when
-## the player stands still inside its pickup range, then runs the charge-up:
-## the player is locked in place and fully vulnerable (the game's only
-## vulnerability window by design) while the aim arrow grows toward the cursor.
-## Pressing "throw" releases: the totem flies to the arrow tip and the player
-## is launched to the same landing point via HopMovement (its one contact
-## point with the movement system).
+## Player-side half of the totem system. The player picks the totem up by
+## pressing "throw" while standing still inside its pickup range, which starts
+## the charge-up: the player is locked in place and fully vulnerable (the
+## game's only vulnerability window by design) while the aim arrow grows toward
+## the cursor. Pressing "throw" again releases: the totem flies to the arrow
+## tip and the player is launched to the same landing point via HopMovement
+## (its one contact point with the movement system).
 
 @export var player: Player
 @export var hop_movement: HopMovement
@@ -32,6 +32,8 @@ func _physics_process(delta: float) -> void:
 
 func _try_pickup() -> void:
 	if totem == null or not hop_movement.is_stationary():
+		return
+	if not Input.is_action_just_pressed("throw"):
 		return
 	if totem.can_pick_up(player):
 		totem.hold(player)
