@@ -2,12 +2,13 @@ class_name TotemController
 extends Node2D
 
 ## Player-side half of the totem system. The player picks the totem up by
-## pressing "throw" while standing still inside its pickup range, which starts
-## the charge-up: the player is locked in place and fully vulnerable (the
-## game's only vulnerability window by design) while the aim arrow grows toward
-## the cursor. Pressing "throw" again releases: the totem flies to the arrow
-## tip and the player is launched to the same landing point via HopMovement
-## (its one contact point with the movement system).
+## pressing and holding "throw" while standing still inside its pickup range,
+## which starts the charge-up: the player is locked in place and fully
+## vulnerable (the game's only vulnerability window by design) while the button
+## is held and the aim arrow grows toward the cursor. Releasing "throw" throws:
+## the totem flies to the arrow tip and the player is launched to the same
+## landing point via HopMovement (its one contact point with the movement
+## system). Pick up, charge, and throw are all one press-hold-release.
 
 @export var player: Player
 @export var hop_movement: HopMovement
@@ -44,7 +45,9 @@ func _try_pickup() -> void:
 
 func _process_charge(delta: float) -> void:
 	_charge_time += delta
-	if Input.is_action_just_pressed("throw"):
+	# Throw the instant the button is let go. Using "not pressed" rather than
+	# just_released also covers a fast tap that releases within one frame.
+	if not Input.is_action_pressed("throw"):
 		_release()
 
 

@@ -11,8 +11,10 @@ extends Node2D
 @export var projectile_scene: PackedScene
 ## Shots fired per placement before the totem goes inert.
 @export var max_charges := 6
-## The player must be stationary within this range (pixels) to pick it up.
-@export var pickup_range := 48.0
+## Player-center-to-totem-center distance (pixels) that counts as "in range"
+## to pick it up. Generous so any part of the player body touching the ring
+## qualifies, not just standing on top.
+@export var pickup_range := 96.0
 ## Matches HopMovement.launch_duration so player and totem land together.
 @export var flight_duration := 0.3
 

@@ -16,7 +16,7 @@ extends Node2D
 ## Aiming this many pixels past the outer ring gives the max-distance hop.
 @export var overshoot_for_max_hop := 200.0
 @export var min_hop_distance := 60.0
-@export var hop_duration := 0.35
+@export var hop_duration := 0.175
 @export var walk_speed := 70.0
 ## Matches Totem.flight_duration so player and totem land together on a throw.
 @export var launch_duration := 0.3

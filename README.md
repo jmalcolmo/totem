@@ -19,12 +19,12 @@ virtual cursor around the player.
 - **Cursor past outer ring** — hop toward the cursor; hop distance scales
   with how far past the ring the cursor is, up to the move speed stat.
   Direction only changes between hops; no landing lag between chained hops.
-- **Left click / gamepad bottom button (`throw`) near the totem** — while
-  standing still (cursor in inner ring) within pickup range of the inert
+- **Hold left click / gamepad bottom button (`throw`) near the totem** —
+  while standing still (cursor in inner ring) within pickup range of the inert
   totem, pressing throw picks it up and starts the charge-up. You are locked
-  in place and fully vulnerable while charging.
-- **Left click / gamepad bottom button (`throw`) again** — release the throw.
-  The totem flies to the arrow tip and you are launched to the same spot.
+  in place and fully vulnerable while the button is held. **Release** to throw:
+  the totem flies to the arrow tip and you are launched to the same spot. A
+  quick tap throws a short distance; a long hold charges up to max range.
 
 Once placed, the totem autofires at the nearest enemy until its charges run
 out, then goes inert (gray) where it landed. Hop back and stand next to it to
