@@ -1,6 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
+## HP/XP/level owner. Movement lives in the HopMovement child node and all
+## damage output lives in the totem system — the player has no attack.
+
 signal health_changed(current: float, max_hp: float)
 signal xp_changed(xp: int, xp_required: int)
 signal leveled_up(new_level: int)
@@ -12,25 +15,22 @@ var hp: float
 var level: int = 1
 var xp: int = 0
 
-var _dead := false
+## Set by TotemController during the throw charge-up; HopMovement reads it and
+## holds the player in place. This is the game's only vulnerability window.
+var control_locked := false
 
-@onready var weapon: Weapon = $Weapon
+var _dead := false
 
 
 func _ready() -> void:
 	if stats == null:
 		stats = PlayerStats.new()
 	hp = stats.max_hp
-	weapon.stats = stats
 	health_changed.emit(hp, stats.max_hp)
 	xp_changed.emit(xp, xp_required())
 
 
 func _physics_process(delta: float) -> void:
-	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = input_dir * stats.move_speed
-	move_and_slide()
-
 	if stats.hp_regen > 0.0 and hp < stats.max_hp and not _dead:
 		hp = minf(hp + stats.hp_regen * delta, stats.max_hp)
 		health_changed.emit(hp, stats.max_hp)

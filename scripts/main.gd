@@ -10,6 +10,8 @@ var _pending_level_ups: Array[int] = []
 var _choosing := false
 
 @onready var player: Player = $Player
+@onready var totem: Totem = $Totem
+@onready var totem_controller: TotemController = $Player/TotemController
 @onready var spawner: EnemySpawner = $EnemySpawner
 @onready var pickups: Node2D = $Pickups
 @onready var hud: CanvasLayer = $HUD
@@ -19,6 +21,9 @@ var _choosing := false
 
 func _ready() -> void:
 	hud.setup(player)
+	totem.stats = player.stats
+	totem.enemy_container = $Enemies
+	totem_controller.totem = totem
 	player.leveled_up.connect(_on_player_leveled_up)
 	player.died.connect(_on_player_died)
 	spawner.enemy_spawned.connect(_on_enemy_spawned)

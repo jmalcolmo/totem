@@ -6,11 +6,11 @@ extends RefCounted
 ## handling the id in apply().
 
 const UPGRADES: Array[Dictionary] = [
-	{"id": "attack_speed", "name": "Attack Speed", "description": "+15% attack speed"},
-	{"id": "attack_damage", "name": "Attack Damage", "description": "+5 attack damage"},
+	{"id": "attack_speed", "name": "Totem Fire Rate", "description": "+15% totem fire rate"},
+	{"id": "attack_damage", "name": "Totem Damage", "description": "+5 totem damage per shot"},
 	{"id": "max_hp", "name": "Max HP", "description": "+20 max HP (heals 20)"},
 	{"id": "hp_regen", "name": "HP Regen", "description": "+1 HP per second"},
-	{"id": "move_speed", "name": "Move Speed", "description": "+10% move speed"},
+	{"id": "move_speed", "name": "Hop Distance", "description": "+10% max hop distance"},
 	{"id": "armor", "name": "Armor", "description": "+1 armor (flat damage reduction)"},
 ]
 
