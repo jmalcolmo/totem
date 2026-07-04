@@ -11,10 +11,9 @@ extends Node2D
 @export var projectile_scene: PackedScene
 ## Shots fired per placement before the totem goes inert.
 @export var max_charges := 6
-## Player-center-to-totem-center distance (pixels) that counts as "in range"
-## to pick it up. Generous so any part of the player body touching the ring
-## qualifies, not just standing on top.
-@export var pickup_range := 96.0
+## Radius (pixels) of the pickup circle drawn around the totem. Standing
+## anywhere inside it lets the player grab the totem, mid-hop or not.
+@export var pickup_radius := 96.0
 ## Matches HopMovement.launch_duration so player and totem land together.
 @export var flight_duration := 0.3
 
@@ -43,7 +42,7 @@ func _ready() -> void:
 
 func can_pick_up(body: Node2D) -> bool:
 	return state == State.INERT \
-		and body.global_position.distance_to(global_position) <= pickup_range
+		and body.global_position.distance_to(global_position) <= pickup_radius
 
 
 func hold(holder: Node2D) -> void:
@@ -126,3 +125,11 @@ func _update_appearance() -> void:
 		State.ACTIVE:
 			visual.color = Color(0.95, 0.75, 0.2)
 			charges_label.text = str(charges)
+	queue_redraw()
+
+
+func _draw() -> void:
+	# Pickup circle, always visible on the totem. Green while inert (ready to
+	# grab), dim otherwise so it still reads as the totem's footprint.
+	var ring := Color(0.4, 0.9, 0.5, 0.55) if state == State.INERT else Color(1, 1, 1, 0.15)
+	draw_arc(Vector2.ZERO, pickup_radius, 0.0, TAU, 64, ring, 1.5)

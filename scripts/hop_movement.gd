@@ -32,10 +32,12 @@ func is_grounded() -> bool:
 	return _state == State.GROUNDED
 
 
-## True when standing still (grounded, not walking, not charge-locked by an
-## external system) — the state required to pick up the totem.
-func is_stationary() -> bool:
-	return _state == State.GROUNDED and player.velocity == Vector2.ZERO
+## Immediately cancels any in-progress hop/launch and grounds the player. Used
+## by the totem pickup so grabbing the totem interrupts a hop mid-air.
+func force_ground() -> void:
+	_state = State.GROUNDED
+	_air_time_left = 0.0
+	player.velocity = Vector2.ZERO
 
 
 ## Max hop distance in pixels; this is what the move speed stat now controls.
