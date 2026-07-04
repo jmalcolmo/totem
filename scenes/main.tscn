@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="3_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/upgrade_menu.tscn" id="6_upgrade_menu"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+
+[node name="Projectiles" type="Node2D" parent="." groups=["projectile_container"]]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("player", "enemy_container")]
+script = ExtResource("3_spawner")
+enemy_scene = ExtResource("4_enemy")
+player = NodePath("../Player")
+enemy_container = NodePath("../Enemies")
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="UpgradeMenu" parent="." instance=ExtResource("6_upgrade_menu")]
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 11
+visible = false
+
+[node name="Dim" type="ColorRect" parent="GameOverLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOverLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverLayer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="GameOverLabel" type="Label" parent="GameOverLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverLayer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Restart"
